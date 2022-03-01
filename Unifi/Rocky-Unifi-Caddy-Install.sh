@@ -18,7 +18,7 @@ function CaddyConfig {
 cat << EOF | sudo tee /etc/caddy/Caddyfile
 # UniFi Docker Caddyfile Conf.
 # Admin control panel
-unifi.$DOMAIN {
+unifi.hyperbit.it {
         reverse_proxy 10.0.0.1:8443 {
                 transport http {
                         tls
@@ -26,14 +26,16 @@ unifi.$DOMAIN {
                 }
         }
 }
+
 # Device configuration proxy
-unifi.$DOMAIN:8080 {
+unifi.hyperbit.it:8080 {
         reverse_proxy 10.0.0.1:8080 {
                 transport http
         }
 }
+
 # UniFi guest portal (https)
-unifi.$DOMAIN:8843 {
+unifi.hyperbit.it:8843 {
         reverse_proxy 10.0.0.1:8843 {
                 transport http {
                         tls
@@ -41,10 +43,12 @@ unifi.$DOMAIN:8843 {
                 }
         }
 }
+
 # UniFi guest portal (redir to https)
-unifi.$DOMAIN:8080 {
+unifi.hyperbit.it:8080 {
     redir https://unifi.$DOMAIN:8843
 }
+
 EOF
 }
 
@@ -89,7 +93,7 @@ function UnifiPull {
 }
 
 function UnifiInstall {
-    docker run -d --name=Unifi -net unifi-net --ip 10.0.0.1 -v unifi-disk:/config -e PUID=1000 -e PGID=1000 -p 3478:3478/udp -p 10001:10001/udp -p 8880:8880 -p 6789:6789 -p 5514:5514/udp linuxserver/unifi-controller:7.0.23
+    docker run -d --name=Unifi --net=unifi-net --ip=10.0.0.1 -v unifidisk:/config -e PUID=1000 -e PGID=1000 -p 3478:3478/udp -p 10001:10001/udp -p 8880:8880 -p 6789:6789 -p 5514:5514/udp linuxserver/unifi-controller:7.0.23
 }
 
 AmIRoot
