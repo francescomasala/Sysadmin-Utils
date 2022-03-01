@@ -45,7 +45,7 @@ unifi.hyperbit.it:8843 {
 }
 
 # UniFi guest portal (redir to https)
-unifi.hyperbit.it:8080 {
+http://unifi.hyperbit.it:8843 {
     redir https://unifi.hyperbit.it:8843
 }
 
