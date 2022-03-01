@@ -89,7 +89,6 @@ function UnifiPull {
 }
 
 function UnifiInstall {
-    mkdir /Unifi/
     docker run -d --name=Unifi -net unifi-net --ip 10.0.0.1 -v unifi-disk:/config -e PUID=1000 -e PGID=1000 -p 3478:3478/udp -p 10001:10001/udp -p 8880:8880 -p 6789:6789 -p 5514:5514/udp linuxserver/unifi-controller:7.0.23
 }
 
@@ -103,3 +102,4 @@ UnifiPull
 DockerCreateNet
 DockerCreateDisk
 UnifiInstall
+CaddyEnable
